@@ -26,7 +26,7 @@ public class Util {
 			String text = response.substring(status.length()).trim();
 
 			if (status.equalsIgnoreCase("success")) {
-				result.setFirst(StatusCode.SUCESS);
+				result.setFirst(StatusCode.SUCCESS);
 			} else {
 				result.setFirst(StatusCode.FAILED);
 			}
