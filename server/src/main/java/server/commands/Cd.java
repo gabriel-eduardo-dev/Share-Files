@@ -32,7 +32,7 @@ public class Cd extends Command {
 			return send("failed not a folder");
 		}
 
-		return send("sucess " + folder.getPath());
+		return send("success " + folder.getPath());
 	}
 
 	public StatusCode send(String message) {

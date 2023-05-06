@@ -58,7 +58,7 @@ public class Cd extends Command {
 
 			switch (result.getFirst()) {
 				case FAILED:
-					System.out.println("[ls:server] " + result.getSecond());
+					System.out.println("[ls:server]: " + result.getSecond());
 					return StatusCode.FAILED;
 				case SUCCESS:
 					path.replace(0, path.length(), result.getSecond());
