@@ -69,6 +69,6 @@ public class Download extends Command {
 			} catch (IOException e) { 
 				return StatusCode.SERVER_DISCONNECTED;
 		}
-		return StatusCode.SUCESS;
+		return StatusCode.SUCCESS;
 	}
 }

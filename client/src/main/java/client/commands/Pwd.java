@@ -20,6 +20,6 @@ public class Pwd extends Command {
 	public StatusCode execute(ArrayList<String> args, ArrayList<String> commandArgs, StringBuilder path) {
 
 		System.out.println(path.toString());
-		return StatusCode.SUCESS;
+		return StatusCode.SUCCESS;
 	}
 }

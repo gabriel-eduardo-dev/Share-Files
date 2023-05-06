@@ -24,14 +24,25 @@ public class Cd extends Command {
 
 		StringBuilder messageToServer = new StringBuilder("cd ");
 
-		final String _path = args.get(1);
-
-		if (_path.charAt(0) == '/') {
-			messageToServer.append(_path);
-		} else {
-			messageToServer.append(path + "/" + _path);
+		if (args.size() > 2) {
+			System.out.println("[cd]: optional argument: [PATH]");
+			return StatusCode.COMMAND_ERROR;
 		}
+		// if pass a path
+		if (args.size() == 2) {
 
+			final String _path = args.get(1);
+
+			// FIX: add support for windows
+			//
+			// check if is from linux root
+			if (_path.charAt(0) == '/') {
+				messageToServer.append(_path);
+			} else {
+				messageToServer.append(path + "/" + _path);
+			}
+		}
+		
 		try {
 			bfout.write(messageToServer.toString());
 			bfout.newLine();
@@ -45,11 +56,21 @@ public class Cd extends Command {
 
 			Pair<StatusCode, String> result = Util.parseServerResponse(messageFromServer);
 
-			path.replace(0, path.length(), result.getSecond());
+			switch (result.getFirst()) {
+				case FAILED:
+					System.out.println("[ls:server] " + result.getSecond());
+					return StatusCode.FAILED;
+				case SUCCESS:
+					path.replace(0, path.length(), result.getSecond());
+					break;
+				default:
+					break;
+			}
+
 
 		} catch (IOException e) {
 			return StatusCode.SERVER_DISCONNECTED;
 		}
-		return StatusCode.SUCESS;
+		return StatusCode.SUCCESS;
 	}
 }

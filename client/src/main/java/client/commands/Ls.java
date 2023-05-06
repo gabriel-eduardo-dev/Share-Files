@@ -76,7 +76,7 @@ public class Ls extends Command {
 			String sortedResult[] = result.getSecond().split(" ");
 			Arrays.sort(sortedResult);
 			switch (result.getFirst()) {
-				case SUCESS:
+				case SUCCESS:
 					for (String str : sortedResult) {
 						System.out.println(str);
 					}
@@ -88,7 +88,7 @@ public class Ls extends Command {
 				default:
 					break;
 			}
-			return StatusCode.SUCESS;
+			return StatusCode.SUCCESS;
 		} catch (IOException e) {
 			return StatusCode.SERVER_DISCONNECTED;
 		}

@@ -73,7 +73,7 @@ public class Terminal {
 			if (__command != null) {
 				final StatusCode result = __command.execute(args, commandArgs, path);
 				switch (result) {
-					case SUCESS:
+					case SUCCESS:
 						break;
 					case COMMAND_ERROR:
 						// Commands erros must display in the command class
