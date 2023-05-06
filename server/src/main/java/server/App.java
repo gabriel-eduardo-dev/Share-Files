@@ -4,11 +4,27 @@
 package server;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+		// Default port
+		int PORT = 3885;
+
+		if (args.length > 1) {
+			System.out.println("[SERVER]: optional arguments: [PORT > 1000]");
+			System.exit(-1);
+		}
+		if (args.length == 1) {
+			try {
+				PORT = Integer.parseInt(args[0]);
+			} catch (NumberFormatException e) {
+				System.out.println("[SERVER]: [PORT] cannot have character(s)");
+				System.exit(-2);
+			}
+		}
+		Server server = new Server(PORT);
+		if (server != null) {
+			server.start();
+		}
     }
 }
