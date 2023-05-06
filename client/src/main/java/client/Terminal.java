@@ -86,7 +86,7 @@ public class Terminal {
 				System.out.println("Unknown command: " + args.get(0));
 			}
 		}
-		return StatusCode.SUCESS;
+		return StatusCode.SUCCESS;
 	}
 	
 	public StringBuilder getPath() {
