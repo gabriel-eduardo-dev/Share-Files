@@ -17,7 +17,7 @@ import server.commands.StatusCode;
  */
 public abstract class Command {
 	
-	public StatusCode execute(ArrayList<String> args, ArrayList<String> commandArgs) { return StatusCode.COMMAND_ERROR; }
+	public abstract StatusCode execute(ArrayList<String> args, ArrayList<String> commandArgs);
 
 	protected OutputStream out;
 	protected InputStream in;

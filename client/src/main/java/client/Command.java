@@ -35,5 +35,5 @@ public abstract class Command {
 	}
 
 	// Override it
-	public StatusCode execute(ArrayList<String> args, ArrayList<String> commandArgs, StringBuilder path) { return StatusCode.COMMAND_ERROR; }
+	public abstract StatusCode execute(ArrayList<String> args, ArrayList<String> commandArgs, StringBuilder path);
 }
