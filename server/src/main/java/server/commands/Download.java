@@ -41,8 +41,6 @@ public class Download extends Command {
 				byte buffer[] = new byte[1024*4];
 				int bytesRead = 0;
 
-				System.out.println("file size: " + file.length());
-
 				while ((bytesRead = fileIn.read(buffer)) != -1) {
 					out.write(buffer, 0, bytesRead);
 				}
