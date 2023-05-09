@@ -3,6 +3,8 @@ package client.commands;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import client.Command;
@@ -33,10 +35,13 @@ public class Cd extends Command {
 
 			final String _path = args.get(1);
 
-			// FIX: add support for windows
-			//
-			// check if is from linux root
-			if (_path.charAt(0) == '/') {
+			// backward a folder
+			if (_path.equals("..") || _path.equals("../")) {
+
+			}
+
+			Path ppath = Paths.get(_path);
+			if (ppath.isAbsolute()) {
 				messageToServer.append(_path);
 			} else {
 				messageToServer.append(path + "/" + _path);
