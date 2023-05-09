@@ -39,8 +39,6 @@ public class Terminal {
 						System.out.print(" [DISCONNECTED]\n");
 						// Well if the server is disconnected, theres no reason to continue process commands
 						return statusCode;
-					case EXIT:
-						return statusCode;
 				}
 			} else {
 				System.out.println("[Server]: Unknown command: " + args.get(0));

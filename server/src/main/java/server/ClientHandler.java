@@ -44,7 +44,6 @@ public class ClientHandler implements Runnable {
 			terminal.commands.put("ls", new Ls(this.out, this.in));
 			terminal.commands.put("cd", new Cd(this.out, this.in));
 			terminal.commands.put("download", new Download(this.out, this.in));
-			terminal.commands.put("exit", new Exit(this.out, this.in));
 
 			this.homePath = System.getProperty("user.home");
 			this.userName = bfin.readLine();
