@@ -16,6 +16,7 @@ import java.util.Scanner;
 import client.commands.Cd;
 import client.commands.Clear;
 import client.commands.Download;
+import client.commands.Exit;
 import client.commands.Ls;
 import client.commands.Pwd;
 import client.commands.Util.StatusCode;
@@ -88,6 +89,7 @@ public class App {
 					terminal.commands.put("cd", new Cd(out, in));
 					terminal.commands.put("clear", new Clear(out, in));
 					terminal.commands.put("download", new Download(out, in));
+					terminal.commands.put("exit", new Exit(out, in));
 					// Main loop
 					while (client.isConnected()) {
 						System.out.print("[" + client.getInetAddress().toString() + "]: ");
@@ -95,8 +97,13 @@ public class App {
 						if (command.isEmpty()) {
 							continue;
 						}
-						if (terminal.execute(command) == StatusCode.SERVER_DISCONNECTED) {
+						StatusCode result = terminal.execute(command);
+						if (result == StatusCode.SERVER_DISCONNECTED) {
 							System.out.println("Server disconnected");
+							break;
+						}
+						else if (result == StatusCode.EXIT) {
+							System.out.println("Cya");
 							break;
 						}
 					}
