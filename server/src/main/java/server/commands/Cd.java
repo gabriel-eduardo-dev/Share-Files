@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import server.Command;
@@ -25,6 +27,7 @@ public class Cd extends Command {
 		}
 
 		File folder = new File(args.get(1));
+		Path path = Paths.get(folder.getPath()).normalize();
 
 		if (!folder.exists()) {
 			return send("failed folder not exist");
@@ -32,7 +35,7 @@ public class Cd extends Command {
 			return send("failed not a folder");
 		}
 
-		return send("success " + folder.getPath());
+		return send("success " + path.toString());
 	}
 
 	public StatusCode send(String message) {

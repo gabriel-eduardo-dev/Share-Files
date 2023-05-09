@@ -40,7 +40,7 @@ public class Cd extends Command {
 
 			}
 
-			Path ppath = Paths.get(_path);
+			Path ppath = Paths.get(_path).normalize();
 			if (ppath.isAbsolute()) {
 				messageToServer.append(_path);
 			} else {
