@@ -65,32 +65,17 @@ public class Ls extends Command {
 			bfout.flush();
 
 			// Receive message from server
-			final String messageFromServer = bfin.readLine();
-
-			// Check connection
-			if (messageFromServer == null) {
-				throw new IOException();
+			final int totalFolders = din.readInt();
+			for (int i = 0; i < totalFolders; ++i) {
+				final String file = bfin.readLine();
+				if (file == null) {
+					throw new IOException("File from server is null");
+				}
+				System.out.println(file);
 			}
-
-			Pair<StatusCode, String> result = Util.parseServerResponse(messageFromServer);
-			String sortedResult[] = result.getSecond().split(" ");
-			Arrays.sort(sortedResult);
-			switch (result.getFirst()) {
-				case SUCCESS:
-					for (String str : sortedResult) {
-						System.out.println(str);
-					}
-					break;
-				case FAILED:
-					// Print why it failed is server responsability
-					System.out.println(result.getSecond());
-					break;
-				default:
-					break;
-			}
-			return StatusCode.SUCCESS;
 		} catch (IOException e) {
 			return StatusCode.SERVER_DISCONNECTED;
 		}
+		return StatusCode.SUCCESS;
 	}
 }

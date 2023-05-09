@@ -23,6 +23,7 @@ public class Ls extends Command {
 	public StatusCode execute(ArrayList<String> args, ArrayList<String> commandArgs) {
 
 		StringBuilder messageToClient = new StringBuilder();
+		ArrayList<String> folders = new ArrayList<>();
 
 		File folder = new File(args.get(1));
 		boolean hidden = commandArgs.contains("-a");
@@ -35,12 +36,12 @@ public class Ls extends Command {
 			messageToClient.append("Success ");
 			if (hidden) {
 				for (File file : folder.listFiles()) {
-					messageToClient.append(file.getName() + ' ');
+					folders.add(file.getName());
 				}
 			} else {
 				for (File file :folder.listFiles()) {
 					if (!file.isHidden()) {
-						messageToClient.append(file.getName() + ' ');
+						folders.add(file.getName());
 					}
 				}
 			}
@@ -48,10 +49,15 @@ public class Ls extends Command {
 
 		try {
 
-			bfout.write(messageToClient.toString());
-			bfout.newLine();
-			bfout.flush();
+			final int totalFiles = folders.size();
+			dout.writeInt(totalFiles);
 
+			for (String file : folders) {
+				bfout.write(file);
+				bfout.newLine();
+				bfout.flush();
+			}
+			ok = true;
 			if (ok) return StatusCode.SUCCESS;
 			else return StatusCode.COMMAND_ERROR;
 
